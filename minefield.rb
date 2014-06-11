@@ -62,12 +62,11 @@ class Minefield
     (-1..1).each do |i|
       adj_row = row + i
       (-1..1).each do |j|
-        binding.pry
         adj_col = col + j
-        if contains_mine?(adj_row, adj_col)
-          adj_mines += 1
-        else
-          adjacent_mines(adj_row, adj_row)
+        if i != 0 || j != 0
+          if contains_mine?(adj_row, adj_col)
+            adj_mines += 1
+          end
         end
       end
     end
