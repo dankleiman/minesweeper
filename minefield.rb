@@ -4,11 +4,12 @@ class Minefield
   def initialize(row_count, column_count, mine_count)
     @column_count = column_count
     @row_count = row_count
+    @mine_count = mine_count
   end
 
   # Return true if the cell been uncovered, false otherwise.
   def cell_cleared?(row, col)
-    true
+    false
   end
 
   # Uncover the given cell. If there are no adjacent mines to this cell
@@ -35,10 +36,17 @@ class Minefield
   end
 
   def contains_mine?(row, col)
-    false
+    mine = rand(1..8)
+    if mine == 1
+      @mine_count -= 1
+      true
+    else
+      false
+    end
   end
 
   def adjacent_mines(row, col)
     0
   end
+
 end
