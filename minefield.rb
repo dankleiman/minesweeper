@@ -7,6 +7,7 @@ class Minefield
     @row_count = row_count
     @mine_count = mine_count
     @detenated = false
+    @mines = place_mines
   end
 
   # Return true if the cell been uncovered, false otherwise.
@@ -50,21 +51,10 @@ class Minefield
       end
     end
     mines
-    binding.pry
   end
 
   def contains_mine?(row, col)
-    place_mines
-    if @mine_count == 0
-      return false
-    end
-    mine = rand(1..8)
-    if mine == 1
-      @mine_count -= 1
-      true
-    else
-      false
-    end
+    @mines.include?([row,col])
   end
 
   def adjacent_mines(row, col)
