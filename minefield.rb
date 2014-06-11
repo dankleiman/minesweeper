@@ -1,4 +1,3 @@
-require 'pry'
 class Minefield
   attr_reader :row_count, :column_count
 
@@ -25,7 +24,9 @@ class Minefield
   # when the player clicks on the cell.
   def clear(row, col)
     if !cell_cleared?(row,col)
-      @cleared_cells << [row,col]
+      if !over_the_edge?(row,col)
+        @cleared_cells << [row,col]
+      end
       if contains_mine?(row, col)
         @detonated = true
       elsif adjacent_mines(row, col) == 0
@@ -40,7 +41,6 @@ class Minefield
         end
       end
     end
-    binding.pry
   end
 
   def over_the_edge?(row, col)
@@ -74,7 +74,7 @@ class Minefield
   def place_mines
     mines = []
     until mines.length == @mine_count
-      mine = [rand(0..@row_count), rand(0..@column_count)]
+      mine = [rand(0..@row_count - 1), rand(0..@column_count - 1)]
       if !mines.include?(mine)
         mines << mine
       end
