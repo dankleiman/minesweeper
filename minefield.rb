@@ -40,6 +40,7 @@ class Minefield
         end
       end
     end
+    binding.pry
   end
 
   def over_the_edge?(row, col)
@@ -63,7 +64,11 @@ class Minefield
   # Check if all cells that don't have mines have been uncovered. This is the
   # condition used to see if the player has won the game.
   def all_cells_cleared?
-    false
+    if @cleared_cells.length == (@row_count * @column_count) - @mine_count
+      true
+    else
+      false
+    end
   end
 
   def place_mines
